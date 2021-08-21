@@ -17,7 +17,6 @@ const Tweet = (props) => {
 
   const formattedTweet = useSelector(
     () => ({
-      authedUser,
       tweet: tweet
         ? formatTweet(tweet, users[tweet.author], authedUser, parentTweet)
         : null,
