@@ -1,9 +1,15 @@
-import './App.css';
+import React from 'react'
+import { useDispatch } from "react-redux";
+import { handleInitialData } from "./actions/shared";
 
 function App() {
+
+  const dispatch = useDispatch();
+  dispatch(handleInitialData());
+
   return (
-    <div className="App">
-    Hello World
+    <div>
+      Hello World
     </div>
   );
 }
