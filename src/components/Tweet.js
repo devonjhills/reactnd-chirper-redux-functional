@@ -1,11 +1,12 @@
 import React from "react";
-import { useSelector, shallowEqual } from "react-redux";
+import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import { formatTweet, formatDate } from "../utils/helpers";
 import {
   TiArrowBackOutline,
   TiHeartOutline,
   TiHeartFullOutline,
 } from "react-icons/ti";
+import { handleToggleTweet } from "../actions/tweets";
 
 const Tweet = (props) => {
   const tweets = useSelector((state) => state.tweets);
@@ -27,10 +28,18 @@ const Tweet = (props) => {
   const { name, avatar, timestamp, text, hasLiked, likes, replies, parent } =
     formattedTweet.tweet;
 
+  const dispatch = useDispatch();
+
   const handleLike = (e) => {
     e.preventDefault();
 
-    // todo: Handle Like Tweet
+    dispatch(
+      handleToggleTweet({
+        id: tweet.id,
+        hasLiked,
+        authedUser,
+      })
+    );
   };
   const toParent = (e, id) => {
     e.preventDefault();
