@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { Redirect } from "react-router-dom";
 import { handleAddTweet } from "../actions/tweets";
 
 const NewTweet = (props) => {
@@ -22,6 +23,10 @@ const NewTweet = (props) => {
     setText("");
     setToHome(() => (id ? false : true));
   };
+
+  if (toHome === true) {
+    return <Redirect to="/" />;
+  }
 
   const tweetLeft = 280 - text.length;
 

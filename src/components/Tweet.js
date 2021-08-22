@@ -7,6 +7,7 @@ import {
   TiHeartFullOutline,
 } from "react-icons/ti";
 import { handleToggleTweet } from "../actions/tweets";
+import { Link, withRouter } from "react-router-dom";
 
 const Tweet = (props) => {
   const tweets = useSelector((state) => state.tweets);
@@ -25,7 +26,7 @@ const Tweet = (props) => {
     shallowEqual
   );
 
-  const { name, avatar, timestamp, text, hasLiked, likes, replies, parent } =
+  const { name, avatar, timestamp, text, hasLiked, likes, replies, parent, id } =
     formattedTweet.tweet;
 
   const dispatch = useDispatch();
@@ -43,11 +44,11 @@ const Tweet = (props) => {
   };
   const toParent = (e, id) => {
     e.preventDefault();
-    // todo: Redirect to parent Tweet.
+    props.history.push(`/tweet/${id}`)
   };
 
   return (
-    <div className="tweet">
+    <Link to={`/tweet/${id}`} className="tweet">
       <img src={avatar} alt={`Avatar of ${name}`} className="avatar" />
       <div className="tweet-info">
         <div>
@@ -76,10 +77,8 @@ const Tweet = (props) => {
           <span>{likes !== 0 && likes}</span>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
-export default Tweet;
-
-//tweet: formatTweet(tweet, users[tweet.author], authedUser),
+export default withRouter(Tweet);
